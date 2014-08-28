@@ -1,3 +1,8 @@
+Edited to add a method to clear the timeout
+Added a format for showing hours minutes and seconds in a time format. Set the format to H:M:S to use. This format is zero-padded.
+
+-------------
+
 Elapsed Timer Read Me!
 Created by:	Emil Krautmann
 Website:	http://ecoders.wordpress.com
