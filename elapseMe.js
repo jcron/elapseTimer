@@ -7,7 +7,11 @@
  Thanks and enjoy!
 *******************************************/
 
-var elapseMe = 	(function elapseTimer(settings)
+// modified to show a time format
+
+var timer_id;
+
+var elapseMe = (function elapseTimer(settings)
 	{
 		var d = new Date();
 		var defaults = {year: d.getFullYear(), month: d.getMonth(), day: d.getDate(), hr:d.getHours(), min: d.getMinutes(), sec: d.getSeconds(), targetId: "elapsedTime", update : true, show : "all"};
@@ -60,11 +64,21 @@ var elapseMe = 	(function elapseTimer(settings)
 		resultOut += (settings.show == "all" || settings.show.match(/hours/gi) ) ? elapsedHours + " Hour" + ((elapsedHours == 1) ? " ":"s ") :"";
 		resultOut += (settings.show == "all" || settings.show.match(/minutes/gi) ) ? elapsedMinutes + " Minute" + ((elapsedMinutes == 1) ? " ":"s ") :"";
 		resultOut += (settings.show == "all" || settings.show.match(/seconds/gi) ) ? elapsedSeconds + " Second" + ((elapsedSeconds == 1) ? " ":"s ") :"";
+        resultOut += (settings.show == "H:M:S") ? pad(elapsedHours) + ":" + pad(elapsedMinutes) + ":" + pad(elapsedSeconds) : "";
 
 		document.getElementById(settings.targetId).innerHTML = resultOut;
 
 		if(settings.update)
 		{
-			t = setTimeout(function(){ elapseTimer(settings)},1000);
+			timer_id = setTimeout(function(){ elapseTimer(settings)},1000);
 		}
 	});
+
+var stopElapseMe = (function stop() {
+   clearTimeout(timer_id);
+});
+
+
+function pad(n) {
+    return (n < 10) ? ("0" + n) : n;
+}
